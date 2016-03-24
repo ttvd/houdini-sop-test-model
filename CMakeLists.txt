@@ -128,10 +128,16 @@ message(STATUS "HFS=${HOUDINI_SOPSTANFORDMODEL_HFS}")
 
 set(HOUDINI_SOPSTANFORDMODEL_INCLUDE
     SOP_StanfordModel.h
+    SOP_StanfordModelBunny.h
+    SOP_StanfordModelDragon.h
+    SOP_StanfordModelBuddha.h
 )
 
 set(HOUDINI_SOPSTANFORDMODEL_SOURCE
     SOP_StanfordModel.C
+    SOP_StanfordModelBunny.C
+    SOP_StanfordModelDragon.C
+    SOP_StanfordModelBuddha.C
 )
 
 set(HOUDINI_SOPSTANFORDMODEL_LIBS

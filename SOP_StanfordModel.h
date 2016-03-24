@@ -19,4 +19,14 @@ class SOP_API SOP_StanfordModel : public SOP_Node
     protected:
 
         virtual OP_ERROR cookMySop(OP_Context& context);
+
+    private:
+
+        int GetModelType(fpreal t) const;
+        int GetPrimitiveType(fpreal t) const;
+        bool GetTranslateCoordinateSystem(fpreal t) const;
+        float GetUniformScale(fpreal t) const;
+        float GetCenterX(fpreal t) const;
+        float GetCenterY(fpreal t) const;
+        float GetCenterZ(fpreal t) const;
 };
