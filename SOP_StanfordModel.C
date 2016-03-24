@@ -13,7 +13,7 @@
 #include <GU/GU_Detail.h>
 
 
-static PRM_Name s_name_translate_coordinate_system("sfm_translate_coordinate_system", "Translate to Houdini Coordinate System");
+static PRM_Name s_name_keep_original_coordinate_system("sfm_keep_original_coordinate_system", "Keep Original Coordinate System");
 static PRM_Name s_name_model_type("sfm_model_type", "Model Type");
 static PRM_Name s_name_model_types[] =
 {
@@ -31,7 +31,7 @@ static PRM_Name s_name_primitive_types[] =
 };
 
 
-static PRM_Default s_default_translate_coordinate_system(true);
+static PRM_Default s_default_keep_original_coordinate_system(false);
 static PRM_Range s_default_uscale_range(PRM_RANGE_UI, 0, PRM_RANGE_UI, 10);
 
 
@@ -43,7 +43,7 @@ PRM_Template
 SOP_StanfordModel::myTemplateList[] = {
     PRM_Template(PRM_ORD, 1, &s_name_model_type, 0, &s_choicelist_model_type),
     PRM_Template(PRM_ORD, 1, &s_name_primitive_type, 0, &s_choicelist_primitive_type),
-    PRM_Template(PRM_TOGGLE, 1, &s_name_translate_coordinate_system, &s_default_translate_coordinate_system),
+    PRM_Template(PRM_TOGGLE, 1, &s_name_keep_original_coordinate_system, &s_default_keep_original_coordinate_system),
     PRM_Template(PRM_XYZ, 3, &PRMcenterName),
     PRM_Template(PRM_FLT, 1, &PRMuscaleName, PRMoneDefaults, 0, &s_default_uscale_range),
     PRM_Template()
@@ -65,9 +65,9 @@ SOP_StanfordModel::GetPrimitiveType(fpreal t) const
 
 
 bool
-SOP_StanfordModel::GetTranslateCoordinateSystem(fpreal t) const
+SOP_StanfordModel::GetKeepOriginalCoordinateSystem(fpreal t) const
 {
-    return evalInt("sfm_translate_coordinate_system", 0, t);
+    return evalInt("sfm_keep_original_coordinate_system", 0, t);
 }
 
 
@@ -139,7 +139,7 @@ SOP_StanfordModel::cookMySop(OP_Context& context)
 
     int mode_type = GetModelType(t);
     int primitive_type = GetPrimitiveType(t);
-    bool translate_coordinate_system = GetTranslateCoordinateSystem(t);
+    bool keep_original_coordinate_system = GetKeepOriginalCoordinateSystem(t);
     float uniform_scale = GetUniformScale(t);
     UT_Vector3 model_center(GetCenterX(t), GetCenterY(t), GetCenterZ(t));
 
@@ -207,7 +207,7 @@ SOP_StanfordModel::cookMySop(OP_Context& context)
             point_data -= model_center;
             point_data *= uniform_scale;
 
-            if(translate_coordinate_system)
+            if(keep_original_coordinate_system)
             {
                 point_data = UT_Vector3(point_data.x(), point_data.z(), point_data.y());
             }
