@@ -1,6 +1,6 @@
 # houdini-sop-stanford-model
 
-[Houdini](http://www.sidefx.com/index.php) SOP node which lets you choose one of the Stanford models and generate its geometry.
+[Houdini](http://www.sidefx.com/index.php) SOP / OBJ node which lets you choose one of the Stanford models and generate its geometry.
 ![houdini-sop-stanford-model screenshot](http://i.imgur.com/k8aaxWM.png)
 
 ## Binaries, Houdini 15
@@ -14,14 +14,16 @@
 * Define HOUDINI_VERSION env variable to be the version of Houdini 15 you wish to build against (for example "15.0.313").
 * Alternatively, you can have HFS env variable defined (set when you source houdini_setup).
 * Generate build files from CMake for your favorite build system.
-* Build the SOP Houdini dso (SOP_StanfordModel.dylib or SOP_StanfordModel.dll).
+* Build the SOP / OBJ Houdini dso (SOP_StanfordModel.dylib or SOP_StanfordModel.dll) and (OBJ_StanfordModel.dylib or OBJ_StanfordModel.dll).
 * Place the dso in the appropriate Houdini dso folder.
   * On OS X this would be /Users/your_username/Library/Preferences/houdini/15.0/dso/
 
 ## Usage
 
-* Place a Stanford Model SOP, select type of model.
-* Additionally, select type of primitive.
+* Place a Stanford Model OBJ node, this will create an OBJ level node with Stanford Model SOP node inside.
+* Or place a Stanford Model SOP inside any OBJ node.
+* Select the type of model (Bunny, Dragon or Buddha).
+* Select the type of primitive (Polygons or Points).
 
 ## License
 

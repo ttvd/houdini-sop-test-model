@@ -1,0 +1,22 @@
+project(OBJ_StanfordModel)
+
+set(HOUDINI_OBJSTANFORDMODEL_INCLUDE
+    OBJ_StanfordModel.h
+)
+
+set(HOUDINI_OBJSTANFORDMODEL_SOURCE
+    OBJ_StanfordModel.C
+)
+
+set(HOUDINI_OBJSTANFORDMODEL_LIBS
+    HoudiniUT
+    HoudiniPRM
+    HoudiniOP3
+    boost_system
+)
+
+add_definitions(
+    -DUT_DSO_TAGINFO=\"3262197cbf1f501f2caa0ca8572890fb3e4b9bfcc021d8a873a8c3063d69ee812b972985db32267a5946addc2f8f31780eadf501ffc2e85149062ee263fe81be4baf508aff924994a3268d0847f848e6ab4e98a984ed956599\")
+
+add_library(OBJ_StanfordModel SHARED ${HOUDINI_OBJSTANFORDMODEL_INCLUDE} ${HOUDINI_OBJSTANFORDMODEL_SOURCE})
+target_link_libraries(OBJ_StanfordModel ${HOUDINI_OBJSTANFORDMODEL_LIBS})
