@@ -33,6 +33,21 @@ OBJ_StanfordModel::buildTemplatePair(OP_TemplatePair* template_prev)
 }
 
 
+OP_ERROR
+OBJ_StanfordModel::cookMyObj(OP_Context& context)
+{
+    OP_ERROR errorstatus = OBJ_Geometry::cookMyObj(context);
+
+    SOP_Node* node = getDisplaySopPtr();
+    if(!node)
+    {
+        createNode("stanfordmodel");
+    }
+
+    return errorstatus;
+}
+
+
 void
 newObjectOperator(OP_OperatorTable* table)
 {

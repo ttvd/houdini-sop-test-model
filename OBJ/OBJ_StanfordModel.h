@@ -9,6 +9,10 @@ class OBJ_StanfordModel : public OBJ_Geometry
         OBJ_StanfordModel(OP_Network* network, const char* name, OP_Operator* op);
         virtual ~OBJ_StanfordModel();
 
+    protected:
+
+        virtual OP_ERROR cookMyObj(OP_Context& context);
+
     public:
 
         static OP_Node* myConstructor(OP_Network* network, const char* name, OP_Operator* entry);
