@@ -51,49 +51,49 @@ SOP_StanfordModel::myTemplateList[] = {
 
 
 int
-SOP_StanfordModel::GetModelType(fpreal t) const
+SOP_StanfordModel::getModelType(fpreal t) const
 {
     return evalInt("sfm_model_type", 0, t);
 }
 
 
 int
-SOP_StanfordModel::GetPrimitiveType(fpreal t) const
+SOP_StanfordModel::getPrimitiveType(fpreal t) const
 {
     return evalInt("sfm_primitive_type", 0, t);
 }
 
 
 bool
-SOP_StanfordModel::GetKeepOriginalCoordinateSystem(fpreal t) const
+SOP_StanfordModel::getKeepOriginalCoordinateSystem(fpreal t) const
 {
     return evalInt("sfm_keep_original_coordinate_system", 0, t);
 }
 
 
 float
-SOP_StanfordModel::GetUniformScale(fpreal t) const
+SOP_StanfordModel::getUniformScale(fpreal t) const
 {
     return evalFloat("scale", 0, t);
 }
 
 
 float
-SOP_StanfordModel::GetCenterX(fpreal t) const
+SOP_StanfordModel::getCenterX(fpreal t) const
 {
     return evalFloat("t", 0, t);
 }
 
 
 float
-SOP_StanfordModel::GetCenterY(fpreal t) const
+SOP_StanfordModel::getCenterY(fpreal t) const
 {
     return evalFloat("t", 1, t);
 }
 
 
 float
-SOP_StanfordModel::GetCenterZ(fpreal t) const
+SOP_StanfordModel::getCenterZ(fpreal t) const
 {
     return evalFloat("t", 2, t);
 }
@@ -137,11 +137,11 @@ SOP_StanfordModel::cookMySop(OP_Context& context)
 
     fpreal t = context.getTime();
 
-    int mode_type = GetModelType(t);
-    int primitive_type = GetPrimitiveType(t);
-    bool keep_original_coordinate_system = GetKeepOriginalCoordinateSystem(t);
-    float uniform_scale = GetUniformScale(t);
-    UT_Vector3 model_center(GetCenterX(t), GetCenterY(t), GetCenterZ(t));
+    int mode_type = getModelType(t);
+    int primitive_type = getPrimitiveType(t);
+    bool keep_original_coordinate_system = getKeepOriginalCoordinateSystem(t);
+    float uniform_scale = getUniformScale(t);
+    UT_Vector3 model_center(getCenterX(t), getCenterY(t), getCenterZ(t));
 
     int num_vertices = 0;
     int num_indices = 0;
