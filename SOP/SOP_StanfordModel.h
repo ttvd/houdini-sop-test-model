@@ -22,11 +22,11 @@ class SOP_API SOP_StanfordModel : public SOP_Node
 
     private:
 
-        int GetModelType(fpreal t) const;
-        int GetPrimitiveType(fpreal t) const;
-        bool GetKeepOriginalCoordinateSystem(fpreal t) const;
-        float GetUniformScale(fpreal t) const;
-        float GetCenterX(fpreal t) const;
-        float GetCenterY(fpreal t) const;
-        float GetCenterZ(fpreal t) const;
+        int getModelType(fpreal t) const;
+        int getPrimitiveType(fpreal t) const;
+        bool getKeepOriginalCoordinateSystem(fpreal t) const;
+        float getUniformScale(fpreal t) const;
+        float getCenterX(fpreal t) const;
+        float getCenterY(fpreal t) const;
+        float getCenterZ(fpreal t) const;
 };
