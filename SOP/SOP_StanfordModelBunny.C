@@ -1,8 +1,15 @@
 #include "SOP_StanfordModelBunny.h"
 
 
+int
+SOP_StanfordModelBunny::s_num_vertices = 104505;
+
+int
+SOP_StanfordModelBunny::s_num_indices = 208998;
+	
+	
 float
-SOP_StanfordModelBunny::s_vertices[SOP_StanfordModelBunny::s_num_vertices] = {
+SOP_StanfordModelBunny::s_vertices[104505] = {
     0.2974f, 0.07472f, -0.45152f,
 0.31606f, 0.06902f, -0.43718f,
 0.3255f, 0.06222f, -0.44522f,
@@ -34842,7 +34849,7 @@ SOP_StanfordModelBunny::s_vertices[SOP_StanfordModelBunny::s_num_vertices] = {
 
 
 float
-SOP_StanfordModelBunny::s_indices[SOP_StanfordModelBunny::s_num_indices] = {
+SOP_StanfordModelBunny::s_indices[208998] = {
     0, 1, 2,
 3, 4, 5,
 6, 7, 8,
