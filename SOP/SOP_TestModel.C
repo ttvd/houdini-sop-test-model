@@ -1,7 +1,7 @@
-#include "SOP_StanfordModel.h"
-#include "SOP_StanfordModelBunny.h"
-#include "SOP_StanfordModelDragon.h"
-#include "SOP_StanfordModelBuddha.h"
+#include "SOP_TestModel.h"
+#include "SOP_TestModelBunny.h"
+#include "SOP_TestModelDragon.h"
+#include "SOP_TestModelBuddha.h"
 
 #include <UT/UT_DSOVersion.h>
 #include <UT/UT_Interrupt.h>
@@ -40,7 +40,7 @@ static PRM_ChoiceList s_choicelist_primitive_type(PRM_CHOICELIST_SINGLE, s_name_
 
 
 PRM_Template
-SOP_StanfordModel::myTemplateList[] = {
+SOP_TestModel::myTemplateList[] = {
     PRM_Template(PRM_ORD, 1, &s_name_model_type, 0, &s_choicelist_model_type),
     PRM_Template(PRM_ORD, 1, &s_name_primitive_type, 0, &s_choicelist_primitive_type),
     PRM_Template(PRM_TOGGLE, 1, &s_name_keep_original_coordinate_system, &s_default_keep_original_coordinate_system),
@@ -51,76 +51,76 @@ SOP_StanfordModel::myTemplateList[] = {
 
 
 int
-SOP_StanfordModel::getModelType(fpreal t) const
+SOP_TestModel::getModelType(fpreal t) const
 {
     return evalInt("sfm_model_type", 0, t);
 }
 
 
 int
-SOP_StanfordModel::getPrimitiveType(fpreal t) const
+SOP_TestModel::getPrimitiveType(fpreal t) const
 {
     return evalInt("sfm_primitive_type", 0, t);
 }
 
 
 bool
-SOP_StanfordModel::getKeepOriginalCoordinateSystem(fpreal t) const
+SOP_TestModel::getKeepOriginalCoordinateSystem(fpreal t) const
 {
     return evalInt("sfm_keep_original_coordinate_system", 0, t);
 }
 
 
 float
-SOP_StanfordModel::getUniformScale(fpreal t) const
+SOP_TestModel::getUniformScale(fpreal t) const
 {
     return evalFloat("scale", 0, t);
 }
 
 
 float
-SOP_StanfordModel::getCenterX(fpreal t) const
+SOP_TestModel::getCenterX(fpreal t) const
 {
     return evalFloat("t", 0, t);
 }
 
 
 float
-SOP_StanfordModel::getCenterY(fpreal t) const
+SOP_TestModel::getCenterY(fpreal t) const
 {
     return evalFloat("t", 1, t);
 }
 
 
 float
-SOP_StanfordModel::getCenterZ(fpreal t) const
+SOP_TestModel::getCenterZ(fpreal t) const
 {
     return evalFloat("t", 2, t);
 }
 
 
 OP_Node*
-SOP_StanfordModel::myConstructor(OP_Network* network, const char* name, OP_Operator* op)
+SOP_TestModel::myConstructor(OP_Network* network, const char* name, OP_Operator* op)
 {
-    return new SOP_StanfordModel(network, name, op);
+    return new SOP_TestModel(network, name, op);
 }
 
 
-SOP_StanfordModel::SOP_StanfordModel(OP_Network* network, const char* name, OP_Operator* op) :
+SOP_TestModel::SOP_TestModel(OP_Network* network, const char* name, OP_Operator* op) :
     SOP_Node(network, name, op)
 {
 
 }
 
 
-SOP_StanfordModel::~SOP_StanfordModel()
+SOP_TestModel::~SOP_TestModel()
 {
 
 }
 
 
 OP_ERROR
-SOP_StanfordModel::cookMySop(OP_Context& context)
+SOP_TestModel::cookMySop(OP_Context& context)
 {
     if(error() >= UT_ERROR_ABORT)
     {
@@ -129,7 +129,7 @@ SOP_StanfordModel::cookMySop(OP_Context& context)
 
     gdp->clearAndDestroy();
 
-    UT_AutoInterrupt boss("Building Stanford Model");
+    UT_AutoInterrupt boss("Building Test Model");
     if(boss.wasInterrupted())
     {
         return error();
@@ -154,33 +154,33 @@ SOP_StanfordModel::cookMySop(OP_Context& context)
         default:
         case 0:
         {
-            num_vertices = SOP_StanfordModelBunny::s_num_vertices;
-            num_indices = SOP_StanfordModelBunny::s_num_indices;
+            num_vertices = SOP_TestModelBunny::s_num_vertices;
+            num_indices = SOP_TestModelBunny::s_num_indices;
 
-            data_vertices = &SOP_StanfordModelBunny::s_vertices[0];
-            data_indices = &SOP_StanfordModelBunny::s_indices[0];
+            data_vertices = &SOP_TestModelBunny::s_vertices[0];
+            data_indices = &SOP_TestModelBunny::s_indices[0];
 
             break;
         }
 
         case 1:
         {
-            num_vertices = SOP_StanfordModelDragon::s_num_vertices;
-            num_indices = SOP_StanfordModelDragon::s_num_indices;
+            num_vertices = SOP_TestModelDragon::s_num_vertices;
+            num_indices = SOP_TestModelDragon::s_num_indices;
 
-            data_vertices = &SOP_StanfordModelDragon::s_vertices[0];
-            data_indices = &SOP_StanfordModelDragon::s_indices[0];
+            data_vertices = &SOP_TestModelDragon::s_vertices[0];
+            data_indices = &SOP_TestModelDragon::s_indices[0];
 
             break;
         }
 
         case 2:
         {
-            num_vertices = SOP_StanfordModelBuddha::s_num_vertices;
-            num_indices = SOP_StanfordModelBuddha::s_num_indices;
+            num_vertices = SOP_TestModelBuddha::s_num_vertices;
+            num_indices = SOP_TestModelBuddha::s_num_indices;
 
-            data_vertices = &SOP_StanfordModelBuddha::s_vertices[0];
-            data_indices = &SOP_StanfordModelBuddha::s_indices[0];
+            data_vertices = &SOP_TestModelBuddha::s_vertices[0];
+            data_indices = &SOP_TestModelBuddha::s_indices[0];
 
             break;
         }
@@ -244,6 +244,6 @@ SOP_StanfordModel::cookMySop(OP_Context& context)
 void
 newSopOperator(OP_OperatorTable* table)
 {
-    table->addOperator(new OP_Operator("stanfordmodel", "Stanford Model", SOP_StanfordModel::myConstructor,
-        SOP_StanfordModel::myTemplateList, 0, 0, 0, OP_FLAG_GENERATOR));
+    table->addOperator(new OP_Operator("testmodel", "Test Model", SOP_TestModel::myConstructor,
+        SOP_TestModel::myTemplateList, 0, 0, 0, OP_FLAG_GENERATOR));
 }

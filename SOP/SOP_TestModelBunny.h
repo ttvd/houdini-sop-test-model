@@ -1,6 +1,6 @@
 #pragma once
 
-struct SOP_StanfordModelBunny
+struct SOP_TestModelBunny
 {
     static int s_num_vertices;
     static int s_num_indices;

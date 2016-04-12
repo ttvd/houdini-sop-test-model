@@ -1,15 +1,15 @@
-#include "SOP_StanfordModelBuddha.h"
+#include "SOP_TestModelBuddha.h"
 
 int
-SOP_StanfordModelBuddha::s_num_vertices = 149970;
+SOP_TestModelBuddha::s_num_vertices = 149970;
 
 
 int
-SOP_StanfordModelBuddha::s_num_indices = 300000;
+SOP_TestModelBuddha::s_num_indices = 300000;
 	
 	
 float
-SOP_StanfordModelBuddha::s_vertices[149970] = {
+SOP_TestModelBuddha::s_vertices[149970] = {
     0.26248f, 0.09544f, 0.27192f,
 0.22234f, 0.08022f, 0.24696f,
 0.21288f, 0.0878f, 0.28922f,
@@ -50004,7 +50004,7 @@ SOP_StanfordModelBuddha::s_vertices[149970] = {
 
 
 float
-SOP_StanfordModelBuddha::s_indices[300000] = {
+SOP_TestModelBuddha::s_indices[300000] = {
     0, 1, 2,
 	3, 4, 5,
 	6, 7, 8,

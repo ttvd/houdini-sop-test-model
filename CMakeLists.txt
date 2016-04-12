@@ -3,7 +3,7 @@ set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 cmake_policy(SET CMP0003 NEW)
 include(CheckCXXCompilerFlag)
 
-project(HoudiniSopStanfordModel)
+project(HoudiniSopTestModel)
 
 # Detect C++11 or C++0x.
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
@@ -24,8 +24,8 @@ function(extract_houdini_version parm_hfs)
     if(EXISTS ${_version_file})
         file(READ ${_version_file} _version_file_contents)
         string(REGEX MATCH "#define SYS_VERSION_FULL \"([0-9]+\.[0-9]+\.[0-9]+)\"" _version_line ${_version_file_contents})
-        string(REGEX REPLACE "#define SYS_VERSION_FULL \"([0-9]+\.[0-9]+\.[0-9]+)\"" "\\1" HOUDINI_SOPSTANFORDMODEL_VERSION_FULL ${_version_line})
-        set(HOUDINI_SOPSTANFORDMODEL_VERSION_FULL ${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL} PARENT_SCOPE)
+        string(REGEX REPLACE "#define SYS_VERSION_FULL \"([0-9]+\.[0-9]+\.[0-9]+)\"" "\\1" HOUDINI_SOP_TEST_MODEL_VERSION_FULL ${_version_line})
+        set(HOUDINI_SOP_TEST_MODEL_VERSION_FULL ${HOUDINI_SOP_TEST_MODEL_VERSION_FULL} PARENT_SCOPE)
     else()
         message(FATAL " ${parm_hfs} does not point to a valid Houdini baseline.")
     endif()
@@ -34,35 +34,35 @@ endfunction()
 if(APPLE)
 
     if(DEFINED ENV{HOUDINI_VERSION})
-        set(HOUDINI_SOPSTANFORDMODEL_VERSION_FULL $ENV{HOUDINI_VERSION})
-        set(HOUDINI_SOPSTANFORDMODEL_HFS /Library/Frameworks/Houdini.Framework/Versions/${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL})
-        set(_version_file /Library/Frameworks/Houdini.Framework/Versions/${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL}/Resources/toolkit/include/SYS/SYS_Version.h)
+        set(HOUDINI_SOP_TEST_MODEL_VERSION_FULL $ENV{HOUDINI_VERSION})
+        set(HOUDINI_SOP_TEST_MODEL_HFS /Library/Frameworks/Houdini.Framework/Versions/${HOUDINI_SOP_TEST_MODEL_VERSION_FULL})
+        set(_version_file /Library/Frameworks/Houdini.Framework/Versions/${HOUDINI_SOP_TEST_MODEL_VERSION_FULL}/Resources/toolkit/include/SYS/SYS_Version.h)
         if(NOT EXISTS ${_version_file})
-            message(FATAL " Houdini ${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL} is not installed.")
+            message(FATAL " Houdini ${HOUDINI_SOP_TEST_MODEL_VERSION_FULL} is not installed.")
         endif()
     elseif(DEFINED ENV{HFS})
-        set(HOUDINI_SOPSTANFORDMODEL_HFS $ENV{HFS})
-        if(EXISTS ${HOUDINI_SOPSTANFORDMODEL_HFS}/Frameworks/Houdini.Framework/Versions/Current/Resources)
-            extract_houdini_version(${HOUDINI_SOPSTANFORDMODEL_HFS}/Frameworks/Houdini.Framework/Versions/Current/Resources)
+        set(HOUDINI_SOP_TEST_MODEL_HFS $ENV{HFS})
+        if(EXISTS ${HOUDINI_SOP_TEST_MODEL_HFS}/Frameworks/Houdini.Framework/Versions/Current/Resources)
+            extract_houdini_version(${HOUDINI_SOP_TEST_MODEL_HFS}/Frameworks/Houdini.Framework/Versions/Current/Resources)
         else()
-            extract_houdini_version(${HOUDINI_SOPSTANFORDMODEL_HFS}/Resources)
+            extract_houdini_version(${HOUDINI_SOP_TEST_MODEL_HFS}/Resources)
         endif()
     else()
         message(FATAL " Please define either HOUDINI_VERSION or HFS variable.")
     endif()
 
-    string(REGEX MATCH "([0-9]+\.[0-9]+)" HOUDINI_SOPSTANFORDMODEL_VERSION ${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL})
-    set(HOUDINI_SOPSTANFORDMODEL_VERSION ${HOUDINI_SOPSTANFORDMODEL_VERSION})
+    string(REGEX MATCH "([0-9]+\.[0-9]+)" HOUDINI_SOP_TEST_MODEL_VERSION ${HOUDINI_SOP_TEST_MODEL_VERSION_FULL})
+    set(HOUDINI_SOP_TEST_MODEL_VERSION ${HOUDINI_SOP_TEST_MODEL_VERSION})
 
     # Path to where DSOs are installed for this version.
-    set(HOUDINI_SOPSTANFORDMODEL_DSO_PATH $ENV{HOME}/Library/Preferences/houdini/${HOUDINI_SOPSTANFORDMODEL_VERSION}/dso)
+    set(HOUDINI_SOP_TEST_MODEL_DSO_PATH $ENV{HOME}/Library/Preferences/houdini/${HOUDINI_SOP_TEST_MODEL_VERSION}/dso)
 
-    set(HOUDINI_SOPSTANFORDMODEL_INCLUDE_DIRECTORIES
-        ${HOUDINI_SOPSTANFORDMODEL_HFS}/Resources/toolkit/include
+    set(HOUDINI_SOP_TEST_MODEL_INCLUDE_DIRECTORIES
+        ${HOUDINI_SOP_TEST_MODEL_HFS}/Resources/toolkit/include
     )
 
-    set(HOUDINI_SOPSTANFORDMODEL_LINK_DIRECTORIES
-        ${HOUDINI_SOPSTANFORDMODEL_HFS}/Libraries
+    set(HOUDINI_SOP_TEST_MODEL_LINK_DIRECTORIES
+        ${HOUDINI_SOP_TEST_MODEL_HFS}/Libraries
     )
 
     # Remove lib prefix on OS X.
@@ -74,7 +74,7 @@ if(APPLE)
 
     # OS X specific definitions.
     add_definitions(
-        -DVERSION=\"${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL}\"
+        -DVERSION=\"${HOUDINI_SOP_TEST_MODEL_VERSION_FULL}\"
 
         -DMBSD_INTEL
         -DMBSD_COCOA
@@ -97,35 +97,35 @@ if(APPLE)
 
 elseif (WIN32)
 	if(DEFINED ENV{HOUDINI_VERSION})
-        set(HOUDINI_SOPSTANFORDMODEL_VERSION_FULL $ENV{HOUDINI_VERSION})
-        set(HOUDINI_SOPSTANFORDMODEL_HFS "C:/Program Files/Side Effects Software/Houdini ${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL}")
-        set(_version_file ${HOUDINI_SOPSTANFORDMODEL_HFS}/toolkit/include/SYS/SYS_Version.h)
+        set(HOUDINI_SOP_TEST_MODEL_VERSION_FULL $ENV{HOUDINI_VERSION})
+        set(HOUDINI_SOP_TEST_MODEL_HFS "C:/Program Files/Side Effects Software/Houdini ${HOUDINI_SOP_TEST_MODEL_VERSION_FULL}")
+        set(_version_file ${HOUDINI_SOP_TEST_MODEL_HFS}/toolkit/include/SYS/SYS_Version.h)
         if(NOT EXISTS ${_version_file})
-            message(FATAL " Houdini ${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL} is not installed.")
+            message(FATAL " Houdini ${HOUDINI_SOP_TEST_MODEL_VERSION_FULL} is not installed.")
         endif()
     elseif(DEFINED ENV{HFS})
-        set(HOUDINI_SOPSTANFORDMODEL_HFS $ENV{HFS})
-        extract_houdini_version(${HOUDINI_SOPSTANFORDMODEL_HFS})
+        set(HOUDINI_SOP_TEST_MODEL_HFS $ENV{HFS})
+        extract_houdini_version(${HOUDINI_SOP_TEST_MODEL_HFS})
     else()
         message(FATAL " Please define either HOUDINI_VERSION or HFS variable.")
     endif()
 	
-	string(REGEX MATCH "([0-9]+\.[0-9]+)" HOUDINI_SOPSTANFORDMODEL_VERSION ${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL})
-    set(HOUDINI_SOPSTANFORDMODEL_VERSION ${HOUDINI_SOPSTANFORDMODEL_VERSION})
+	string(REGEX MATCH "([0-9]+\.[0-9]+)" HOUDINI_SOP_TEST_MODEL_VERSION ${HOUDINI_SOP_TEST_MODEL_VERSION_FULL})
+    set(HOUDINI_SOP_TEST_MODEL_VERSION ${HOUDINI_SOP_TEST_MODEL_VERSION})
 
     # Path to where DSOs are installed for this version.
-    set(HOUDINI_SOPSTANFORDMODEL_DSO_PATH ${HOUDINI_SOPSTANFORDMODEL_HFS}/bin)
+    set(HOUDINI_SOP_TEST_MODEL_DSO_PATH ${HOUDINI_SOP_TEST_MODEL_HFS}/bin)
 
-    set(HOUDINI_SOPSTANFORDMODEL_INCLUDE_DIRECTORIES
-        ${HOUDINI_SOPSTANFORDMODEL_HFS}/toolkit/include
+    set(HOUDINI_SOP_TEST_MODEL_INCLUDE_DIRECTORIES
+        ${HOUDINI_SOP_TEST_MODEL_HFS}/toolkit/include
     )
 
-    set(HOUDINI_SOPSTANFORDMODEL_LINK_DIRECTORIES
-        ${HOUDINI_SOPSTANFORDMODEL_HFS}/custom/houdini/dsolib
+    set(HOUDINI_SOP_TEST_MODEL_LINK_DIRECTORIES
+        ${HOUDINI_SOP_TEST_MODEL_HFS}/custom/houdini/dsolib
     )
 	
 	add_definitions(
-        -DVERSION=\"${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL}\"
+        -DVERSION=\"${HOUDINI_SOP_TEST_MODEL_VERSION_FULL}\"
 		-DWIN32
 		-DI386
 		-nologo
@@ -171,18 +171,18 @@ add_definitions(
 )
 
 # Set include directories.
-include_directories(${HOUDINI_SOPSTANFORDMODEL_INCLUDE_DIRECTORIES})
+include_directories(${HOUDINI_SOP_TEST_MODEL_INCLUDE_DIRECTORIES})
 
 # Set link directories.
-link_directories(${HOUDINI_SOPSTANFORDMODEL_LINK_DIRECTORIES})
+link_directories(${HOUDINI_SOP_TEST_MODEL_LINK_DIRECTORIES})
 
 # Set output directory.
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR})
 
-message(STATUS "HOUDINI_VERSION=${HOUDINI_SOPSTANFORDMODEL_VERSION_FULL}")
-message(STATUS "HFS=${HOUDINI_SOPSTANFORDMODEL_HFS}")
+message(STATUS "HOUDINI_VERSION=${HOUDINI_SOP_TEST_MODEL_VERSION_FULL}")
+message(STATUS "HFS=${HOUDINI_SOP_TEST_MODEL_HFS}")
 
 add_subdirectory(OBJ)
 add_subdirectory(SOP)

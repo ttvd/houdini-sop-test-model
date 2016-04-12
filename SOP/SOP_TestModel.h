@@ -3,7 +3,7 @@
 #include <SOP/SOP_API.h>
 #include <SOP/SOP_Node.h>
 
-class SOP_StanfordModel : public SOP_Node
+class SOP_TestModel : public SOP_Node
 {
     public:
 
@@ -13,8 +13,8 @@ class SOP_StanfordModel : public SOP_Node
 
     protected:
 
-        SOP_StanfordModel(OP_Network* network, const char* name, OP_Operator* op);
-        virtual ~SOP_StanfordModel();
+        SOP_TestModel(OP_Network* network, const char* name, OP_Operator* op);
+        virtual ~SOP_TestModel();
 
     protected:
 

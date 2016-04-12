@@ -2,12 +2,12 @@
 
 #include <OBJ/OBJ_Geometry.h>
 
-class OBJ_StanfordModel : public OBJ_Geometry
+class OBJ_TestModel : public OBJ_Geometry
 {
     public:
 
-        OBJ_StanfordModel(OP_Network* network, const char* name, OP_Operator* op);
-        virtual ~OBJ_StanfordModel();
+        OBJ_TestModel(OP_Network* network, const char* name, OP_Operator* op);
+        virtual ~OBJ_TestModel();
 
     protected:
 

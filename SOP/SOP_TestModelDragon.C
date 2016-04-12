@@ -1,13 +1,13 @@
-#include "SOP_StanfordModelDragon.h"
+#include "SOP_TestModelDragon.h"
 
 int
-SOP_StanfordModelDragon::s_num_vertices = 150000;
+SOP_TestModelDragon::s_num_vertices = 150000;
 
 int
-SOP_StanfordModelDragon::s_num_indices = 300000;
+SOP_TestModelDragon::s_num_indices = 300000;
 	
 float
-SOP_StanfordModelDragon::s_vertices[150000] = {
+SOP_TestModelDragon::s_vertices[150000] = {
     0.33662f, 0.61704f, 0.19584f,
 0.3462f, 0.6318f, 0.18212f,
 0.3567f, 0.6461f, 0.19496f,
@@ -50012,7 +50012,7 @@ SOP_StanfordModelDragon::s_vertices[150000] = {
 
 
 float
-SOP_StanfordModelDragon::s_indices[300000] = {
+SOP_TestModelDragon::s_indices[300000] = {
     0, 1, 2,
 3, 4, 5,
 6, 7, 8,
