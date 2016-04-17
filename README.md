@@ -4,8 +4,7 @@
 ![houdini-sop-test-model screenshot](http://i.imgur.com/k8aaxWM.png)
 
 ## Binaries, Houdini 15
-* Mac OS X
-* Windows
+* [Mac OS X, Houdini 15.0.416](https://github.com/ttvd/houdini-sop-test-model/releases/download/1.0/houdini.sop.test.model.15.0.416.tar.gz)
 
 ## Building
 
