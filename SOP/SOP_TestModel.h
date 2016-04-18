@@ -25,6 +25,7 @@ class SOP_TestModel : public SOP_Node
         int getModelType(fpreal t) const;
         int getPrimitiveType(fpreal t) const;
         bool getKeepOriginalCoordinateSystem(fpreal t) const;
+        bool getCreateNormals(fpreal t) const;
         float getUniformScale(fpreal t) const;
         float getCenterX(fpreal t) const;
         float getCenterY(fpreal t) const;

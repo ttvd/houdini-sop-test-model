@@ -2,6 +2,7 @@
 #include "SOP_TestModelBunny.h"
 #include "SOP_TestModelDragon.h"
 #include "SOP_TestModelBuddha.h"
+#include "SOP_TestModelKitten.h"
 
 #include <UT/UT_DSOVersion.h>
 #include <UT/UT_Interrupt.h>
@@ -13,6 +14,7 @@
 #include <GU/GU_Detail.h>
 
 
+static PRM_Name s_name_create_normals("sfm_create_normals", "Create normals");
 static PRM_Name s_name_keep_original_coordinate_system("sfm_keep_original_coordinate_system", "Keep Original Coordinate System");
 static PRM_Name s_name_model_type("sfm_model_type", "Model Type");
 static PRM_Name s_name_model_types[] =
@@ -20,6 +22,7 @@ static PRM_Name s_name_model_types[] =
     PRM_Name("bunny", "Bunny"),
     PRM_Name("dragon", "Dragon"),
     PRM_Name("buddha", "Buddha"),
+    PRM_Name("kitten", "Kitten"),
     PRM_Name(0),
 };
 static PRM_Name s_name_primitive_type("sfm_primitive_type", "Primitive Type");
@@ -31,6 +34,7 @@ static PRM_Name s_name_primitive_types[] =
 };
 
 
+static PRM_Default s_default_create_normals(true);
 static PRM_Default s_default_keep_original_coordinate_system(false);
 static PRM_Range s_default_uscale_range(PRM_RANGE_UI, 0, PRM_RANGE_UI, 10);
 
@@ -46,6 +50,7 @@ SOP_TestModel::myTemplateList[] = {
     PRM_Template(PRM_TOGGLE, 1, &s_name_keep_original_coordinate_system, &s_default_keep_original_coordinate_system),
     PRM_Template(PRM_XYZ, 3, &PRMcenterName),
     PRM_Template(PRM_FLT, 1, &PRMuscaleName, PRMoneDefaults, 0, &s_default_uscale_range),
+    PRM_Template(PRM_TOGGLE, 1, &s_name_create_normals, &s_default_create_normals),
     PRM_Template()
 };
 
@@ -61,6 +66,13 @@ int
 SOP_TestModel::getPrimitiveType(fpreal t) const
 {
     return evalInt("sfm_primitive_type", 0, t);
+}
+
+
+bool
+SOP_TestModel::getCreateNormals(fpreal t) const
+{
+    return evalInt("sfm_create_normals", 0, t);
 }
 
 
@@ -181,6 +193,17 @@ SOP_TestModel::cookMySop(OP_Context& context)
 
             data_vertices = &SOP_TestModelBuddha::s_vertices[0];
             data_indices = &SOP_TestModelBuddha::s_indices[0];
+
+            break;
+        }
+
+        case 3:
+        {
+            num_vertices = SOP_TestModelKitten::s_num_vertices;
+            num_indices = SOP_TestModelKitten::s_num_indices;
+
+            data_vertices = &SOP_TestModelKitten::s_vertices[0];
+            data_indices = &SOP_TestModelKitten::s_indices[0];
 
             break;
         }

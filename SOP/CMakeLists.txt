@@ -5,6 +5,7 @@ set(HOUDINI_SOP_TEST_MODEL_INCLUDE
     SOP_TestModelBunny.h
     SOP_TestModelDragon.h
     SOP_TestModelBuddha.h
+    SOP_TestModelKitten.h
 )
 
 set(HOUDINI_SOP_TEST_MODEL_SOURCE
@@ -12,6 +13,7 @@ set(HOUDINI_SOP_TEST_MODEL_SOURCE
     SOP_TestModelBunny.C
     SOP_TestModelDragon.C
     SOP_TestModelBuddha.C
+    SOP_TestModelKitten.C
 )
 
 if(APPLE)
