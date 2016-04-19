@@ -25,6 +25,8 @@
 * Select the type of model.
 * Select the type of primitive (Polygons or Points).
 * Please remember that several of these artifacts have religious or cultural significance. Don't animate or morph them, don't apply Boolean operators to them, and don't simulate nasty things happening to them (like breaking, exploding, melting, etc.).
+* Bunny, Dragon and Buddha models are provided by the [Stanford 3D scanning repository](http://graphics.stanford.edu/data/3Dscanrep/)
+* Kitten model is provided courtesy of Frank_ter_Haar by the [AIM@SHAPE Shape Repository.](http://segeval.cs.princeton.edu/public/AIM.txt)
 
 ## License
 
