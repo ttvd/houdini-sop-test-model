@@ -10,7 +10,7 @@ int
 SOP_TestModelKitten::s_num_normals = 98850;
 
 float
-SOP_TestModelKitten::s_vertices[98850] =
+SOP_TestModelKitten::s_normals[98850] =
 {
 -0.029274, -0.088380, -0.995657,
 -0.123412, -0.122911, -0.984714,
@@ -205770,7 +205770,7 @@ SOP_TestModelKitten::s_indices[172800] =
 };
 
 float
-SOP_TestModelKitten::s_normals[98850] =
+SOP_TestModelKitten::s_vertices[98850] =
 {
 -0.455060, 0.598160, -0.576942,
 -0.455234, 0.578026, -0.576398,
