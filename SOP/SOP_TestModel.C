@@ -152,6 +152,7 @@ SOP_TestModel::cookMySop(OP_Context& context)
     int mode_type = getModelType(t);
     int primitive_type = getPrimitiveType(t);
     bool keep_original_coordinate_system = getKeepOriginalCoordinateSystem(t);
+    bool create_normals = getCreateNormals(t);
     float uniform_scale = getUniformScale(t);
     UT_Vector3 model_center(getCenterX(t), getCenterY(t), getCenterZ(t));
 
@@ -213,6 +214,17 @@ SOP_TestModel::cookMySop(OP_Context& context)
         }
     }
 
+    GA_RWHandleV3 attr_normal;
+
+    if(create_normals && num_normals > 0)
+    {
+        attr_normal = GA_RWHandleV3(gdp->findFloatTuple(GA_ATTRIB_POINT, "N", 3));
+        if(!attr_normal.isValid())
+        {
+            attr_normal.bind(gdp->addFloatTuple(GA_ATTRIB_POINT, "N", 3));
+        }
+    }
+
     UT_Map<UT_Vector3, GA_Offset> unique_points;
 
     for(int idx = 0; idx < num_indices; idx += 3)
@@ -250,6 +262,13 @@ SOP_TestModel::cookMySop(OP_Context& context)
                 point_offset = gdp->appendPointOffset();
                 gdp->setPos3(point_offset, point_data);
                 unique_points[point_data] = point_offset;
+
+                if(attr_normal.isValid())
+                {
+                    const float* nrm = data_normals + 3 * idx_value;
+                    UT_Vector3 point_normal(*(nrm + 0), *(nrm + 1), *(nrm + 2));
+                    attr_normal.set(point_offset, point_normal);
+                }
             }
 
             if(prim_poly)
