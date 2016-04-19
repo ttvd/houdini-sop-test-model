@@ -157,9 +157,11 @@ SOP_TestModel::cookMySop(OP_Context& context)
 
     int num_vertices = 0;
     int num_indices = 0;
+    int num_normals = 0;
 
     const float* data_vertices = nullptr;
     const float* data_indices = nullptr;
+    const float* data_normals = nullptr;
 
     switch(mode_type)
     {
@@ -201,9 +203,11 @@ SOP_TestModel::cookMySop(OP_Context& context)
         {
             num_vertices = SOP_TestModelKitten::s_num_vertices;
             num_indices = SOP_TestModelKitten::s_num_indices;
+            num_normals = SOP_TestModelKitten::s_num_normals;
 
             data_vertices = &SOP_TestModelKitten::s_vertices[0];
             data_indices = &SOP_TestModelKitten::s_indices[0];
+            data_normals = &SOP_TestModelKitten::s_normals[0];
 
             break;
         }
